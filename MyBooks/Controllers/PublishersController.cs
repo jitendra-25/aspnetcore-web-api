@@ -27,5 +27,21 @@ namespace MyBooks.Controllers
             _publishersService.AddPublisher(publisherVM);
             return Ok();
         }
+
+        [HttpGet]
+        [Route("{publisherId}")]
+        public IActionResult GetPublisherData(int publisherId)
+        {
+            var publisherData = _publishersService.GetPublisherData(publisherId);
+            return Ok(publisherData);
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public IActionResult DeletePublisherById(int id)
+        {
+            _publishersService.DeletePublisherById(id);
+            return Ok();
+        }
     }
 }
