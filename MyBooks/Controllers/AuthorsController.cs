@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using MyBooks.Data.Services;
 using MyBooks.Data.ViewModels;
 using System;
@@ -25,6 +26,14 @@ namespace MyBooks.Controllers
         {
             _authorsService.AddAuthor(AuthorVM);
             return Ok();
+        }
+
+        [HttpGet]
+        [Route("{authorId}")]
+        public IActionResult GetAuthorWithBooks(int authorId)
+        {
+            var authorWithBooksVM = _authorsService.GetAuthorWithBooks(authorId);
+            return Ok(authorWithBooksVM);
         }
     }
 }
