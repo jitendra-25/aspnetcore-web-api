@@ -20,9 +20,22 @@ namespace MyBooks.Data.Services
             return _context.Books.ToList();
         }
 
-        public Book GetBookById(int id)
+        public BookWithAuthorsVM GetBookById(int id)
         {
-            return _context.Books.FirstOrDefault(b => b.Id == id);
+            var bookWithAuthorsVM = _context.Books.Where(n => n.Id == id).Select(book => new BookWithAuthorsVM()
+            {
+                Title = book.Title,
+                Description = book.Description,
+                IsRead = book.IsRead,
+                DateRead = book.IsRead ? book.DateRead.Value : null,
+                Rate = book.IsRead ? book.Rate.Value : null,
+                Genre = book.Genre,
+                CoverUrl = book.CoverUrl,
+                PublisherName = book.Publisher.Name,
+                AuthorNames = book.Book_Authors.Select(n => n.Author.AuthorName).ToList()
+            }).FirstOrDefault();
+
+            return bookWithAuthorsVM;
         }
 
         public void AddBookWithAuthors(BookVM bookVM)
