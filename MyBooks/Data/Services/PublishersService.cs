@@ -1,4 +1,5 @@
 ﻿using MyBooks.Data.Models;
+using MyBooks.Data.Paging;
 using MyBooks.Data.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,34 @@ namespace MyBooks.Data.Services
         public PublishersService(AppDbContext appDbContext)
         {
             this._context = appDbContext;
+        }
+
+        public List<Publisher> GetAllPublishers(string sortBy, string searchString, int? pageNumber)
+        {
+            var allPublishers = _context.Publishers.OrderBy(n => n.Name).ToList();
+
+            if (!string.IsNullOrEmpty(sortBy))
+            {
+                switch (sortBy)
+                {
+                    case "name_desc":
+                        allPublishers = allPublishers.OrderByDescending(n => n.Name).ToList();
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            if(!string.IsNullOrEmpty(searchString))
+            {
+                allPublishers = allPublishers.Where(n => n.Name.Contains(searchString)).ToList();
+            }
+
+            //Paging
+            int pageSize = 5;
+            allPublishers = PaginatedList<Publisher>.Create(allPublishers.AsQueryable(), pageNumber ?? 1, pageSize);
+
+            return allPublishers;
         }
 
         public void AddPublisher(PublisherVM publisherVM)
@@ -40,6 +69,12 @@ namespace MyBooks.Data.Services
             }).FirstOrDefault();
 
             return publisherData;
+        }
+
+        public Publisher GetPublisherById(int publisherId)
+        {
+            var publisher = _context.Publishers.Where(p => p.Id == publisherId).FirstOrDefault();
+            return publisher;
         }
 
         public void DeletePublisherById(int id)
