@@ -44,6 +44,7 @@ namespace MyBooks
             services.AddTransient<BooksService>();
             services.AddTransient<AuthorsService>();
             services.AddTransient<PublishersService>();
+            services.AddTransient<LogsService>();
 
             services.AddApiVersioning(config => 
             {

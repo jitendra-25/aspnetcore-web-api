@@ -30,7 +30,7 @@ namespace MyBooks.Controllers
         [Route("GetAllPublishers")]
         public IActionResult GetAllPublishers(string sortBy, string searchString, int pageNumber)
         {
-            throw new Exception("Test Custom Exception GetAllPublishers");
+            //throw new Exception("Test Custom Exception GetAllPublishers");
             try
             {
                 _logger.LogInformation("Log GetAllPublishers Get Action method");
