@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using MyBooks.Data;
 using MyBooks.Data.Services;
+using MyBooks.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,7 +61,7 @@ namespace MyBooks
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -74,6 +75,8 @@ namespace MyBooks
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.ConfigureBuildInExceptionHandler(loggerFactory);
 
             app.UseEndpoints(endpoints =>
             {
