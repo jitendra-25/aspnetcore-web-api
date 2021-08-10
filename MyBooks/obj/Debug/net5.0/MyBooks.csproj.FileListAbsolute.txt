@@ -59,3 +59,4 @@ E:\Workspace\_dot_net\_DotNet_Study\MyBooks\MyBooks\obj\Debug\net5.0\ref\MyBooks
 E:\Workspace\_dot_net\_DotNet_Study\MyBooks\MyBooks\obj\Debug\net5.0\MyBooks.pdb
 E:\Workspace\_dot_net\_DotNet_Study\MyBooks\MyBooks\obj\Debug\net5.0\MyBooks.genruntimeconfig.cache
 E:\Workspace\_dot_net\_DotNet_Study\MyBooks\MyBooks\obj\Debug\net5.0\MyBooks.csproj.AssemblyReference.cache
+E:\Workspace\_dot_net\_DotNet_Study\MyBooks\MyBooks\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.Versioning.dll
