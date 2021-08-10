@@ -16,7 +16,10 @@ namespace MyBooks
         {
             try
             {
-                Log.Logger = new LoggerConfiguration().CreateLogger();
+                Log.Logger = new LoggerConfiguration()
+                    .WriteTo.File("Logs/log.txt", rollingInterval: RollingInterval.Day)
+                    .CreateLogger();
+
                 CreateHostBuilder(args).Build().Run();
             }
             finally
